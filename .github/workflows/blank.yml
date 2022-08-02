@@ -50,6 +50,10 @@ jobs:
                 "id": "cloudhub-deploy",
                 "username": "${{ secrets.ANYPOINT_USERNAME }}",
                 "password": "${{ secrets.ANYPOINT_PASSWORD }}"
+            },{
+                "id": "releases-ee",
+                "username": "${{ secrets.RELEASES_USERNAME }}",
+                "password": "${{ secrets.RELEASES_PASSWORD }}"
             }]
           
       # maven build command, could add other flags if needed
@@ -67,4 +71,4 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
             name: artifacts
-            path: target/*.jar
+            path:  check-in-papi-app/target/*.jar
