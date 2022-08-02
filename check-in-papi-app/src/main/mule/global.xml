@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+	<configuration-properties
+		doc:name="Configuration properties"
+		doc:id="d3fe2f96-e017-414f-8d3e-d5ce11076243" file="properties.yaml" />
+	<http:listener-config
+		name="api-httpListenerConfig">
+		<http:listener-connection host="0.0.0.0"
+			port="${https.port}" protocol="HTTPS" tlsContext="TLS_Context">
+		</http:listener-connection>
+	</http:listener-config>
+	<apikit:config name="api-config"
+		api="resource::37a145d5-0ca8-4994-9dbb-82005475ff9d:check-in-papi:1.0.0:oas:zip:api.json"
+		outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+	<api-gateway:autodiscovery apiId="${api.id}"
+		ignoreBasePath="true" doc:name="API Autodiscovery"
+		doc:id="9d45ce53-e67b-40d3-b923-1fa2b2fddb14" flowRef="api-main" />
+	<tls:context name="TLS_Context" doc:name="TLS Context" doc:id="15cab713-88a0-40bc-81d6-d6fe448d0931" >
+		<tls:key-store type="${tls.keystore.type}" path="${tls.keystore.path}" alias="${tls.keystore.alias}" keyPassword="${secure::tls.keystore.keyPassword}" password="${secure::tls.keystore.password}" />
+	</tls:context>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="fd70e7dc-fc50-4963-8a0a-f12fc902bbe2" file="secure-properties.yaml" key="${encrypt.key}" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+</mule>
