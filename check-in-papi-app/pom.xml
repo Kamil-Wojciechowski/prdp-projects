@@ -39,6 +39,7 @@
 						<connectedAppGrantType>client_credentials</connectedAppGrantType> -->
 						<!-- <username>${username}</username>
 						<password>${password}</password> -->
+						<server>cloudhub-deploy</server>
 						<applicationName>${applicationName}</applicationName>
 						<environment>${environment}</environment>
 						<objectStoreV2>true</objectStoreV2>
