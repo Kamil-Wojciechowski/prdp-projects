@@ -37,9 +37,8 @@
 						<!-- <connectedAppClientId>${ap.clientid}</connectedAppClientId>
 						<connectedAppClientSecret>${ap.clientsecret}</connectedAppClientSecret>
 						<connectedAppGrantType>client_credentials</connectedAppGrantType> -->
-						
-						<username>${username}</username>
-						<password>${password}</password>
+						<!-- <username>${username}</username>
+						<password>${password}</password> -->
 						<applicationName>${applicationName}</applicationName>
 						<environment>${environment}</environment>
 						<objectStoreV2>true</objectStoreV2>
