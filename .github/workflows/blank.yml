@@ -111,13 +111,13 @@ jobs:
           
     - name: Deploy to CloudHub
       env:
-        AUTHOR: "Andres Morales"
+        AUTHOR: "Kamil Wojciechowski"
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn --file check-in-papi-app/pom.xml deploy -DmuleDeploy \
-        -DapplicationName="checkin-cicd-acm12" \
+        -DapplicationName="check-in-papi-app-wojckapl-git" \
         -Denvironment="dev" \
-        -Dapi.id="18030095" \
+        -Dapi.id="18030100" \
         -Dencrypt.key="${{ secrets.ENCRYPT_KEY }}" \
         -Dclient_id="${{ secrets.AP_CLIENTID }}" \
         -Dclient_secret="${{ secrets.AP_CLIENTSECRET }}"
